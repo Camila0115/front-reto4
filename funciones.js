@@ -96,12 +96,12 @@ const nuevoUsuario = () =>{
 }
 
 const getUser = () =>{
-    $.ajax({
-        url: 'http://localhost:8080/api/user/all',
+    var url =  urlbase +'/all'
+    $.ajax({        
         type:'GET',
-        data:"{}",
-        dataType:'json',
         contentType: "application/json; charset=utf-8",
+        dataType:'JSON',
+        url: url,
         success: function(solucion) {
             console.log(solucion);
             
@@ -111,19 +111,19 @@ const getUser = () =>{
             miTabla += '<td>' + '<FONT COLOR="black" size = "5" face ="Courier">' + "MESSAGETEXT" + '</FONT>' + '</td>';
             miTabla += '</tr>';
             
-            for(i=0; i<solucion.items.length; i++){
+            for(i=0; i<solucion.length; i++){
                 miTabla += '<tr>';
-                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion.items[i].id    + '</FONT>' + '</td>';
-                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion.items[i].name  + '</FONT>' + '</td>';
-                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion.items[i].email  + '</FONT>' + '</td>';
-                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion.items[i].password  + '</FONT>' + '</td>';
+                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion[i].id    + '</FONT>' + '</td>';
+                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion[i].name  + '</FONT>' + '</td>';
+                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion[i].email  + '</FONT>' + '</td>';
+                miTabla += '<td>'+ '<FONT COLOR="black" size = "5" face ="Courier">'+solucion[i].password  + '</FONT>' + '</td>';
                 miTabla += '</tr>';
             }
             miTabla += '</table>';
             $("#resultado").append(miTabla);
         },
-        error: function(xhr, status){
-            alert('ha sucedido un problema:'+ status + json);
+        error: function(){
+            alert('ha sucedido un problema');
         }
     });
 }
